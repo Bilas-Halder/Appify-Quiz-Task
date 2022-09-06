@@ -1,0 +1,18 @@
+.quiz-page {
+  width: 100vw;
+  height: 100vh;
+  padding: 3rem 4rem;
+  background-image: linear-gradient(to right, #268effcc, #5b75ffb3),
+    url("../../Images/background.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.quiz {
+  width: 80%;
+  height: 80%;
+  margin: 3rem auto;
+  padding: 1rem;
+}
