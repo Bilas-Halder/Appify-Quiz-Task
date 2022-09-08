@@ -1,3 +1,23 @@
+/* timeline */
+.cvtl-element {
+  margin: 2rem 0px !important;
+}
+.cvtl-element:first-child {
+  margin-top: 2rem !important;
+}
+.cvtl-element-content {
+  background: white;
+  border-radius: 200px;
+  width: 650px;
+  height: fit-content;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 1rem 3rem 1rem 2rem;
+  cursor: pointer;
+  position: relative;
+}
+/* timeline */
+
 .question {
   background-color: white;
   font-size: 1.3rem;
@@ -71,6 +91,7 @@
   align-items: center;
 }
 .cus-btn {
+  display: flex;
   color: white;
   background-color: #2d67ab;
   font-size: 1.3rem;
@@ -79,11 +100,12 @@
   border-radius: 100px;
   transition: all 0.3s ease-in;
   position: relative;
-  cursor: pointer;
 }
 
 .animation-btn {
   position: relative;
+  background-color: #00000000;
+  border: none;
 }
 .animation-btn::before {
   content: "";
@@ -97,18 +119,79 @@
   transition: all 0.2s ease-in;
 }
 .back-btn::before {
-  right: -1rem;
+  right: -0.5rem;
 }
-.next-btn::before {
-  left: -1rem;
+.next-btn::before,
+.submit-btn::before {
+  left: -0.5rem;
+}
+.upload-arrow {
+  margin-left: 0.5rem;
 }
 .animation-btn:hover .cus-btn {
   color: #2d67ab;
   background-color: #fff;
 }
 .back-btn:hover::before {
-  transform: translateX(-200%);
+  transform: translateX(-190%);
 }
 .next-btn:hover::before {
-  transform: translateX(200%);
+  transform: translateX(190%);
+}
+.submit-btn:hover::before {
+  transform: translateX(250%);
+}
+@media only screen and (max-width: 768px) {
+  /* timeline */
+  .cvtl-element {
+    margin: 0.5rem 0px !important;
+    padding: 0 !important;
+  }
+  .cvtl-element:first-child {
+    margin-top: 1.5rem !important;
+  }
+  .cvtl-element-content {
+    width: 100%;
+
+    border-radius: 20px;
+    font-size: 0.85rem;
+    padding: 1rem 2rem 1rem 1rem;
+  }
+  /* timeline */
+  .question {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem 1rem 1rem 2rem;
+  }
+  .multi-choice {
+    font-size: 0.65rem;
+  }
+  .option-selected {
+    font-size: 1.1rem;
+    right: 0.5rem;
+  }
+
+  /* --buttons-- */
+  .next-back-buttons-wrapper {
+    width: 100%;
+  }
+  .next-back-buttons {
+    width: 90%;
+    margin: 1.5rem;
+  }
+  .cus-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+  .animation-btn::before {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+  .back-btn::before {
+    right: -0.6rem;
+  }
+  .next-btn::before {
+    left: -0.6rem;
+  }
 }
