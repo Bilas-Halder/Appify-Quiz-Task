@@ -7,6 +7,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import firebaseConfig from "./firebase/firebase_config";
 import { initializeApp } from "firebase/app";
+import HomePage from "./Pages/HomePage/HomePage";
 
 initializeApp(firebaseConfig);
 
@@ -15,9 +16,9 @@ function App() {
     <ContextProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<QuizPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/signup" element={<RegisterPage />} />
           <Route path="/quizzes" element={<LoginPage />} />
           <Route path="/quizzes/:id" element={<QuizPage />} />
         </Routes>

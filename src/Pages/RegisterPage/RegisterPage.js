@@ -39,6 +39,9 @@ const RegisterPage = (props) => {
   };
 
   const [emailErr, setEmailErr] = useState(false);
+  const [emailErrMsg, setEmailErrMsg] = useState(
+    "Please enter a valid email address"
+  );
   const [passErr, setPassErr] = useState(0);
   const [nameErr, setNameErr] = useState(false);
 
@@ -84,16 +87,24 @@ const RegisterPage = (props) => {
           setUserDataInDB(userCredential.user)
             .then((user) => {
               console.log(user);
-              navigateTo(path);
+              navigateTo(path || "/");
               setShowing(false);
               formElement.reset();
             })
             .catch((error) => {
-              console.error("Error:", error);
+              console.log("Error -> :", error);
             });
         });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        // const e = JSON.stringify(err);
+        // console.log("Error -> :", e);
+        console.log(err.code);
+        if (err.code === "auth/email-already-in-use") {
+          setEmailErr(true);
+          setEmailErrMsg("Email Already Exist.");
+        }
+      })
       .finally(setLoading(false));
   };
   return (
@@ -117,7 +128,7 @@ const RegisterPage = (props) => {
           </div>
           {emailErr && (
             <Alert variant="danger">
-              <MdErrorOutline /> Please enter a valid email address
+              <MdErrorOutline /> {emailErrMsg}
             </Alert>
           )}
           <div className="input-field">

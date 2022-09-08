@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 const useManagingStates = (props) => {
   const [quizzes, setQuizzes] = useState({});
@@ -44,22 +45,34 @@ const useManagingStates = (props) => {
 
   const setUserDataInDB = (nUser) => {
     const newUser = {
-      email: nUser.email,
+      uid: nUser.uid,
       displayName: nUser.displayName,
+      email: nUser.email,
       photoURL: nUser.photoURL,
+      phoneNumber: nUser.phoneNumber,
       emailVerified: nUser.emailVerified,
       accessToken: nUser.accessToken,
       role: "user",
     };
     console.log("newUser -> ", newUser);
+
+    axios({
+      method: "put",
+      url: `${dbURL}/users`,
+      data: { ...nUser },
+    }).then((res) => {
+      console.log(res);
+    });
+
     // fetch(`${dbURL}/users`, {
-    //     method: 'PUT',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(newUser),
-    // }).then(response => response.json())
-    //     .catch(err => console.log(err));
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(newUser),
+    // })
+    //   .then((response) => response.json())
+    //   .catch((err) => console.log(err));
   };
   useEffect(() => {
     // if the user is signed In then setting the user
@@ -85,12 +98,12 @@ const useManagingStates = (props) => {
     // }, []);
   };
 
-  const logOut = (path, history) => {
+  const logOut = (path, navigateTo) => {
     setLoading(true);
     signOut(auth)
       .then(() => {
         setUser({});
-        history.push(path || "/");
+        navigateTo(path || "/");
       })
       .finally(setLoading(false));
   };

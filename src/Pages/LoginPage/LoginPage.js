@@ -28,11 +28,11 @@ const LoginPage = (props) => {
   const location = useLocation();
   const path = location.state?.from?.pathname;
 
-  // useEffect(() => {
-  //   if (!path && user?.email) {
-  //     navigateTo("/");
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (!path && user?.email) {
+      navigateTo("/");
+    }
+  }, [user]);
 
   const [emailErr, setEmailErr] = useState(false);
   const [passErr, setPassErr] = useState(false);
@@ -74,15 +74,17 @@ const LoginPage = (props) => {
       .then((userCredential) => {
         const nUser = userCredential.user;
         setUser(nUser);
-        // fetch(`${dbURL}/users/role/${user.email}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         setRole(data.role);
-        //         setLogged(true);
-        //         setWrongEmailOrPass(false);
-        //         formElement.reset();
-        //         navigateTo(path);
-        //     })
+        fetch(`${dbURL}/users/email/${user.email}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setRole(data.role);
+            setLogged(true);
+            setWrongEmailOrPass(false);
+            formElement.reset();
+            if (user?.email) {
+              navigateTo("/");
+            }
+          });
         console.log(user);
       })
       .catch((err) => {
@@ -147,10 +149,7 @@ const LoginPage = (props) => {
                 <MdErrorOutline /> Wrong Email or Password | please try again.
               </Alert>
             )}
-            <button
-              className="primary-btn login-btn"
-              onClick={logInUsingEmailHandler}
-            >
+            <button className="login-btn" onClick={logInUsingEmailHandler}>
               Log In
             </button>
           </form>
