@@ -4,6 +4,7 @@ import Quizzes from "../../Components/Quizzes/Quizzes";
 import useAuth from "../../StateManager/useAuth";
 import axios from "axios";
 import "./QuizPage.css";
+import ResultModal from "../../Components/ResultModal/ResultModal";
 
 const QuizPage = (props) => {
   const { quizzes, setQuizzes, loading, setLoading, setCurrentQuiz, setTimer } =
@@ -18,8 +19,8 @@ const QuizPage = (props) => {
         const data = response.data;
         console.log("from data -- ", data);
         setQuizzes(data);
-        console.log("from quizzes -- ", quizzes);
         setCurrentQuiz(0);
+        console.log("from quizzes -- ", quizzes);
         if (data?.isTimePerQues) {
           const t = {
             duration: data?.totalTimeInMinute * 60,
@@ -64,6 +65,8 @@ const QuizPage = (props) => {
       ) : (
         "Loading ... "
       )}
+
+      <ResultModal />
     </>
   );
 };

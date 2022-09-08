@@ -17,13 +17,21 @@ import useAuth from "../../StateManager/useAuth";
 const Quizzes = (props) => {
   const [selected, setSelected] = useState([]);
   const [quiz, setQuiz] = useState();
-  const { quizzes, currentQuiz, setCurrentQuiz, answers, setAnswers } =
-    useAuth();
+  const {
+    quizzes,
+    currentQuiz,
+    setCurrentQuiz,
+    answers,
+    setAnswers,
+    setShowResultModal,
+    setIsPlaying,
+    setIsSubmitted,
+  } = useAuth();
 
   useEffect(() => {
     const q = quizzes.questions;
     if (q) {
-      // console.log("from q -- ", q[currentQuiz]);
+      console.log("from q -- ", q[currentQuiz]);
       setQuiz(q[currentQuiz]);
       if (quiz) {
         if (answers[currentQuiz]) {
@@ -34,7 +42,7 @@ const Quizzes = (props) => {
         }
       }
     }
-  }, [currentQuiz]);
+  }, [currentQuiz, quizzes]);
 
   const generateRandomColor = () => {
     const r = Math.floor(Math.random() * 150) + 30;
@@ -77,6 +85,9 @@ const Quizzes = (props) => {
     } else if (s === "submit") {
       console.log("submit");
       console.log(answers);
+      setShowResultModal(true);
+      setIsPlaying(false);
+      setIsSubmitted(true);
     }
   };
 

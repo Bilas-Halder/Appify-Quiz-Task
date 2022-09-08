@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Counter.css";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { FcUpload } from "react-icons/fc";
 import useAuth from "../../StateManager/useAuth";
 
 const Counter = (props) => {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const { timer, answers, setCurrentQuiz, currentQuiz } = useAuth();
+  const {
+    timer,
+    answers,
+    setCurrentQuiz,
+    currentQuiz,
+    setShowResultModal,
+    isPlaying,
+    setIsPlaying,
+    setIsSubmitted,
+  } = useAuth();
 
   useEffect(() => {}, [currentQuiz]);
   const duration = timer?.duration;
@@ -36,6 +44,8 @@ const Counter = (props) => {
 
   const handleSubmit = () => {
     console.log(answers);
+    setShowResultModal(true);
+    setIsSubmitted(true);
   };
   const handleNext = () => {
     if (currentQuiz < timer.count - 1) {
@@ -44,6 +54,7 @@ const Counter = (props) => {
     } else {
       setIsPlaying(false);
       console.log(answers);
+      handleSubmit();
     }
   };
 
