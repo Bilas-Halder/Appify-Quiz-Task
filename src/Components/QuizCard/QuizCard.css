@@ -1,0 +1,20 @@
+.card-body-text {
+  font-size: 1rem;
+  text-align: left;
+  font-weight: normal;
+}
+.quiz-price {
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  margin: 0.5rem 0;
+}
+.quiz-price span {
+  padding: 0.3rem 1rem;
+  border-radius: 7px;
+  color: white;
+
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}

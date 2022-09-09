@@ -63,7 +63,7 @@ const Counter = (props) => {
       <CountdownCircleTimer
         isPlaying={isPlaying}
         duration={duration}
-        key={currentQuiz}
+        key={timer?.shouldRepeat ? currentQuiz : 0}
         colors={["#1961FB", "#5B8AFD", "#FF635C", "#FF3C31"]}
         colorsTime={[duration * 0.75, duration * 0.5, duration * 0.25, 0]}
         onComplete={() => {

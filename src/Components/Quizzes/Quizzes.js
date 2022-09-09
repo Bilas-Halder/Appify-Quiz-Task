@@ -78,13 +78,9 @@ const Quizzes = (props) => {
   const handleNextBackBtn = (s) => {
     if (s === "back") {
       setCurrentQuiz(currentQuiz - 1);
-      console.log("handling back");
     } else if (s === "next") {
       setCurrentQuiz(currentQuiz + 1);
-      console.log("handling next");
     } else if (s === "submit") {
-      console.log("submit");
-      console.log(answers);
       setShowResultModal(true);
       setIsPlaying(false);
       setIsSubmitted(true);

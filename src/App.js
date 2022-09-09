@@ -19,7 +19,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<RegisterPage />} />
-          <Route path="/quizzes" element={<LoginPage />} />
           <Route path="/quizzes/:id" element={<QuizPage />} />
         </Routes>
       </Router>

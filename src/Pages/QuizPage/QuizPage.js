@@ -5,23 +5,25 @@ import useAuth from "../../StateManager/useAuth";
 import axios from "axios";
 import "./QuizPage.css";
 import ResultModal from "../../Components/ResultModal/ResultModal";
+import { useParams } from "react-router-dom";
 
 const QuizPage = (props) => {
-  const { quizzes, setQuizzes, loading, setLoading, setCurrentQuiz, setTimer } =
+  let { id } = useParams();
+  const { dbURL, setQuizzes, loading, setLoading, setCurrentQuiz, setTimer } =
     useAuth();
 
   useEffect(() => {
     setLoading(true);
+    const uri = `${dbURL}/quizzes/${id}`;
 
     axios
-      .get("https://mocki.io/v1/03e96925-c186-4edc-8b79-1d26324ac1e4")
+      .get(uri)
       .then((response) => {
         const data = response.data;
         console.log("from data -- ", data);
         setQuizzes(data);
         setCurrentQuiz(0);
-        console.log("from quizzes -- ", quizzes);
-        if (data?.isTimePerQues) {
+        if (!data?.isTimePerQues) {
           const t = {
             duration: data?.totalTimeInMinute * 60,
             function: "submit",

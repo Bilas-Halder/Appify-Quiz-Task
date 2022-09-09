@@ -4,17 +4,22 @@ import Modal from "react-bootstrap/Modal";
 import useAuth from "../../StateManager/useAuth";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ResultModal = (props) => {
+  const navigateTo = useNavigate();
   const {
     showResultModal,
     setShowResultModal,
     answers,
     quizzes,
+    setQuizzes,
+    setCurrentQuiz,
     isSubmitted,
     setIsSubmitted,
+    setAnswers,
   } = useAuth();
 
   const [pieData, setPieData] = useState({
@@ -70,6 +75,8 @@ const ResultModal = (props) => {
     data.datasets[0].data = [rightCount, rightAns.length - rightCount];
     setPieData(data);
     setIsSubmitted(false);
+    setCurrentQuiz(0);
+    setAnswers([]);
   }
 
   return (
@@ -90,8 +97,23 @@ const ResultModal = (props) => {
         <Pie data={pieData} />
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => setShowResultModal(false)}>Retake</Button>
-        <Button onClick={() => setShowResultModal(false)}>Back to Home</Button>
+        <Button
+          onClick={() => {
+            setShowResultModal(false);
+            navigateTo(`/`);
+            navigateTo(`/quizzes/${quizzes._id}`);
+          }}
+        >
+          Retake
+        </Button>
+        <Button
+          onClick={() => {
+            setShowResultModal(false);
+            navigateTo(`/`);
+          }}
+        >
+          Back to Home
+        </Button>
       </Modal.Footer>
     </Modal>
   );

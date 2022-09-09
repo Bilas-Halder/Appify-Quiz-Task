@@ -1,52 +1,53 @@
 {
-    "numOfQues" : 3,
-    "isTimePerQues" : false,
-    "totalTimeInMinute" : 0.5,
-    "questions":[
-        {
-            "question": "What is The Question 1 ?",
-            "numOfOptions": 7,
-            "isMultiple": false,
-            "isTimeBound": true,
-            "time": 60,
-            "options": [
-              "ans 1",
-              "Lorem ipsum dolor sit amet consectetur.",
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? ",
-              "answer 4",
-              "answer 4",
-              "answer 4",
-              "answer 4"
-            ],
-            "correctAns": [3],
-            "givenAns": "undefined"
-          },
-        {
-            "question": "What is The Question 2 ?",
-            "numOfOptions": 4,
-            "isMultiple": true,
-            "options": [
-              "ans 1",
-              "answer 7",
-              "answer 7",
-              "answer 7"
-            ],
-            "correctAns": [1,3],
-            "givenAns": "undefined"
-          },
-        {
-            "question": "What is The Question 3 ?",
-            "numOfOptions": 5,
-            "isMultiple": false,
-            "options": [
-              "ans 1",
-              "answer 6",
-              "answer 6",
-              "answer 6",
-              "answer 6"
-            ],
-            "correctAns": [4],
-            "givenAns": "undefined"
-          }
-    ] 
+  "numOfQues" : 3,
+  "isTimePerQues" : false,
+  "totalTimeInMinute" : 3,
+  "paid":true,
+  "price":140,
+  "questions":[
+      {
+          "question": "What is The Question 1 ?",
+          "numOfOptions": 7,
+          "isMultiple": false,
+          "isTimeBound": true,
+          "time": 60,
+          "options": [
+            "ans 1",
+            "Lorem ipsum dolor sit amet consectetur.",
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? ",
+            "answer 4",
+            "answer 5",
+            "answer 6",
+            "answer 7"
+          ],
+          "correctAns": [3]
+        },
+      {
+          "question": "What is The Question 2 ?",
+          "numOfOptions": 4,
+          "isMultiple": true,
+          "options": [
+            "ans 1",
+            "answer 2",
+            "answer 3",
+            "answer 4"
+          ],
+          "correctAns": [1,3]
+        },
+      {
+          "question": "What is The Question 3 ?",
+          "numOfOptions": 5,
+          "isMultiple": false,
+          "options": [
+            "ans 1",
+            "answer 2",
+            "answer 3",
+            "answer 4",
+            "answer 5"
+          ],
+          "correctAns": [4]
+        }
+  ] ,
+  "photoURL":"https://i.ibb.co/mBLKYHp/event-image.jpg",
+  "numOfRetake":5
 }
