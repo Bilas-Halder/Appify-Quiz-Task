@@ -13,6 +13,9 @@
   margin-bottom: 50px;
   font-family: "Libre Baskerville", serif;
 }
+.log-in-header::after {
+  background-color: black;
+}
 .input-field,
 form .button {
   margin: 20px 0;

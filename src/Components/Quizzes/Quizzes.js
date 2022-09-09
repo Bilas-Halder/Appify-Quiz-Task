@@ -144,8 +144,11 @@ const Quizzes = (props) => {
 
       <div className="next-back-buttons-wrapper">
         <div className="next-back-buttons">
+          {console.log("quizzes?.isTimePerQues", quizzes?.isTimePerQues)}
           <button
-            disabled={currentQuiz === 0 ? true : false}
+            disabled={
+              currentQuiz === 0 || quizzes?.isTimePerQues ? true : false
+            }
             onClick={() => handleNextBackBtn("back")}
             className="animation-btn back-btn "
           >

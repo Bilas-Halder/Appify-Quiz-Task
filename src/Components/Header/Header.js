@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Nav } from "react-bootstrap";
 import { Container, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -6,8 +6,15 @@ import useAuth from "../../StateManager/useAuth";
 import "./Header.css";
 
 const Header = (props) => {
-  const { logOut } = useAuth();
+  const { logOut, user, role, dbURL, setRole } = useAuth();
   const navigateTo = useNavigate();
+  useEffect(() => {
+    fetch(`${dbURL}/users/email/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRole(data.role);
+      });
+  }, [user]);
   return (
     <>
       <div className="w-100" style={{ backgroundColor: "#34465d" }}>
@@ -38,14 +45,23 @@ const Header = (props) => {
                   <Nav.Link href="#action1" className="custom-nav-link">
                     All Quizzes
                   </Nav.Link>
-                  <Nav.Link href="#action2" className="custom-nav-link">
-                    Attempted Quizzes
-                  </Nav.Link>
+                  {user?.email && role !== "admin" ? (
+                    <Nav.Link href="#action2" className="custom-nav-link">
+                      Attempted Quizzes
+                    </Nav.Link>
+                  ) : null}
+                  {user?.email && role === "admin" ? (
+                    <Nav.Link
+                      onClick={() => navigateTo("/addquiz")}
+                      className="custom-nav-link"
+                    >
+                      Add Quiz
+                    </Nav.Link>
+                  ) : null}
                 </Nav>
 
                 <div
                   onClick={() => logOut("/login", navigateTo)}
-                  s
                   className="custom-nav-link logout-nav-link me-5"
                 >
                   Logout

@@ -18,6 +18,7 @@ const RegisterPage = (props) => {
     setLogged,
     setLoading,
     setUserDataInDB,
+    setRole,
   } = useAuth();
 
   let navigateTo = useNavigate();
@@ -84,9 +85,10 @@ const RegisterPage = (props) => {
         updateName(name).then(() => {
           setUser(userCredential.user);
           setLogged(true);
-          setUserDataInDB(userCredential.user)
+          setUserDataInDB(userCredential.user, { role: user })
             .then((user) => {
               console.log(user);
+              setRole("user");
               navigateTo(path || "/");
               setShowing(false);
               formElement.reset();

@@ -41,7 +41,18 @@ const QuizCard = ({ quiz }) => {
               Price : {quiz?.price && quiz?.paid ? `$${quiz?.price}` : "Free"}
             </div>
             {quiz?.price && quiz?.paid ? (
-              <Button variant="secondary">Enroll</Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  alert(`
+                      You have to pay $${quiz?.price} to continue
+
+                      We are developing payment process
+                                    please wait...`);
+                }}
+              >
+                Enroll
+              </Button>
             ) : (
               <Button
                 variant="secondary"

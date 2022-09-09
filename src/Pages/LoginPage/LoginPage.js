@@ -74,9 +74,10 @@ const LoginPage = (props) => {
       .then((userCredential) => {
         const nUser = userCredential.user;
         setUser(nUser);
-        fetch(`${dbURL}/users/email/${user.email}`)
+        fetch(`${dbURL}/users/email/${nUser.email}`)
           .then((res) => res.json())
           .then((data) => {
+            console.log("usr -> ", data);
             setRole(data.role);
             setLogged(true);
             setWrongEmailOrPass(false);

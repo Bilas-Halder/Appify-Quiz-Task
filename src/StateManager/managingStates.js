@@ -24,8 +24,8 @@ const useManagingStates = (props) => {
   const [logged, setLogged] = useState(false);
   const [role, setRole] = useState("");
 
-  const dbURL = "http://localhost:5000";
-  // const dbURL = "https://glacial-cliffs-26298.herokuapp.com";
+  // const dbURL = "http://localhost:5000";
+  const dbURL = "https://appifylab-quizzo.herokuapp.com";
 
   const updateName = (name) => {
     return updateProfile(auth.currentUser, {
@@ -43,7 +43,7 @@ const useManagingStates = (props) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const setUserDataInDB = (nUser) => {
+  const setUserDataInDB = (nUser, role = {}) => {
     const newUser = {
       uid: nUser.uid,
       displayName: nUser.displayName,
@@ -52,7 +52,7 @@ const useManagingStates = (props) => {
       phoneNumber: nUser.phoneNumber,
       emailVerified: nUser.emailVerified,
       accessToken: nUser.accessToken,
-      role: "user",
+      ...role,
     };
     console.log("newUser -> ", newUser);
 
@@ -63,16 +63,6 @@ const useManagingStates = (props) => {
     }).then((res) => {
       console.log(res);
     });
-
-    // fetch(`${dbURL}/users`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(newUser),
-    // })
-    //   .then((response) => response.json())
-    //   .catch((err) => console.log(err));
   };
   useEffect(() => {
     // if the user is signed In then setting the user
@@ -88,22 +78,13 @@ const useManagingStates = (props) => {
     });
   }, [auth, logged]);
 
-  const useAdminRole = () => {
-    // useEffect(() => {
-    //     fetch(`${dbURL}/users/role/${user.email}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setRole(data.role);
-    //         })
-    // }, []);
-  };
-
   const logOut = (path, navigateTo) => {
     setLoading(true);
     signOut(auth)
       .then(() => {
         setUser({});
         navigateTo(path || "/");
+        setRole("");
       })
       .finally(setLoading(false));
   };
@@ -138,7 +119,6 @@ const useManagingStates = (props) => {
     logInUsingEmail,
     updateName,
     setRole,
-    useAdminRole,
   };
 };
 

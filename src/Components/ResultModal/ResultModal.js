@@ -20,6 +20,7 @@ const ResultModal = (props) => {
     isSubmitted,
     setIsSubmitted,
     setAnswers,
+    setIsPlaying,
   } = useAuth();
 
   const [pieData, setPieData] = useState({
@@ -88,7 +89,7 @@ const ResultModal = (props) => {
       centered
       backdrop="static"
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
           Your Result
         </Modal.Title>
@@ -102,6 +103,7 @@ const ResultModal = (props) => {
             setShowResultModal(false);
             navigateTo(`/`);
             navigateTo(`/quizzes/${quizzes._id}`);
+            setIsPlaying(true);
           }}
         >
           Retake

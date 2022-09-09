@@ -5,14 +5,28 @@ import useAuth from "../../StateManager/useAuth";
 import axios from "axios";
 import "./QuizPage.css";
 import ResultModal from "../../Components/ResultModal/ResultModal";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 const QuizPage = (props) => {
   let { id } = useParams();
-  const { dbURL, setQuizzes, loading, setLoading, setCurrentQuiz, setTimer } =
-    useAuth();
+  const {
+    dbURL,
+    user,
+    setQuizzes,
+    loading,
+    setLoading,
+    setCurrentQuiz,
+    setTimer,
+  } = useAuth();
+  const navigateTo = useNavigate();
 
   useEffect(() => {
+    if (!user?.email) {
+      console.log(user?.email);
+      navigateTo("/login");
+      return;
+    }
     setLoading(true);
     const uri = `${dbURL}/quizzes/${id}`;
 
@@ -52,21 +66,28 @@ const QuizPage = (props) => {
 
   return (
     <>
-      {!loading ? (
-        <div className="quiz-page">
-          <div className="quiz-header">
-            <div className="logo">QuiZzo</div>
-            <div className="timer">
-              <Counter />
+      <div className="quiz-page">
+        {!loading ? (
+          <>
+            <div className="quiz-header">
+              <div className="logo">QuiZzo</div>
+              <div className="timer">
+                <Counter />
+              </div>
             </div>
+            <div className="quiz">
+              <Quizzes />
+            </div>
+          </>
+        ) : (
+          <div
+            style={{ height: "50vh" }}
+            className="d-flex w-100 justify-content-center align-items-center"
+          >
+            <Spinner animation="border" variant="light" />
           </div>
-          <div className="quiz">
-            <Quizzes />
-          </div>
-        </div>
-      ) : (
-        "Loading ... "
-      )}
+        )}
+      </div>
 
       <ResultModal />
     </>
